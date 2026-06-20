@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Noto Serif SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.font-brush {
+  font-family: 'Ma Shan Zheng', cursive;
+}
+
+/* 水波纹动画 */
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 1s ease-out forwards;
+}
+
+/* 墨滴扩散 */
+@keyframes ink-spread {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-ink {
+  animation: ink-spread 0.8s ease-out forwards;
+}
+
+/* 浮动微光 */
+@keyframes float-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float-glow {
+  animation: float-glow 3s ease-in-out infinite;
+}
+
+/* 画卷展开 */
+@keyframes scroll-unroll {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+
+.animate-scroll {
+  animation: scroll-unroll 0.6s ease-out forwards;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 棋子选中光晕 */
+@keyframes piece-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(212, 168, 83, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 168, 83, 0.8);
+  }
+}
+
+.piece-glow {
+  animation: piece-glow 1.5s ease-in-out infinite;
+}
+
+/* 通关印章效果 */
+@keyframes stamp {
+  0% {
+    transform: scale(2) rotate(-15deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(0.9) rotate(-5deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.animate-stamp {
+  animation: stamp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
