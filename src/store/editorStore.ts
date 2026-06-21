@@ -22,6 +22,8 @@ interface EditorStore extends EditorState {
   removeSeal: (id: string) => void;
   movePiece: (id: string, x: number, y: number) => void;
   moveSeal: (id: string, x: number, y: number) => void;
+  updatePieceType: (id: string, type: string) => void;
+  updateSealRequiredSide: (id: string, side: 'entity' | 'reflection' | 'both') => void;
   clearBoard: () => void;
   savePuzzle: () => string | null;
   loadPuzzle: (puzzle: CustomPuzzle) => void;
@@ -186,6 +188,28 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     set((state) => ({
       seals: state.seals.map((s) =>
         s.id === id ? { ...s, x, y } : s
+      ),
+    }));
+  },
+
+  updatePieceType: (id, type) => {
+    set((state) => ({
+      pieces: state.pieces.map((p) => {
+        if (p.id === id) {
+          return { ...p, type };
+        }
+        if (p.linkedId === id) {
+          return { ...p, type };
+        }
+        return p;
+      }),
+    }));
+  },
+
+  updateSealRequiredSide: (id, side) => {
+    set((state) => ({
+      seals: state.seals.map((s) =>
+        s.id === id ? { ...s, requiredSide: side } : s
       ),
     }));
   },

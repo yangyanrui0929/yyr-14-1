@@ -7,12 +7,16 @@ import { Settings, Grid3X3, Layers, RotateCcw } from 'lucide-react';
 interface PropertyPanelProps {
   selectedPiece: Piece | null;
   selectedSeal: Seal | null;
+  onUpdatePiece: (piece: Piece) => void;
+  onUpdateSeal: (seal: Seal) => void;
   onClose: () => void;
 }
 
 export function PropertyPanel({
   selectedPiece,
   selectedSeal,
+  onUpdatePiece,
+  onUpdateSeal,
   onClose,
 }: PropertyPanelProps) {
   const {
@@ -24,6 +28,8 @@ export function PropertyPanel({
     setPuzzleName,
     movePiece,
     moveSeal,
+    updatePieceType,
+    updateSealRequiredSide,
     clearBoard,
   } = useEditorStore();
 
@@ -163,6 +169,10 @@ export function PropertyPanel({
                 {PIECE_TYPES.map((type) => (
                   <button
                     key={type.id}
+                    onClick={() => {
+                      updatePieceType(selectedPiece.id, type.id);
+                      onUpdatePiece({ ...selectedPiece, type: type.id });
+                    }}
                     className={cn(
                       'w-10 h-10 rounded-full border-2 transition-all',
                       selectedPiece.type === type.id
@@ -219,7 +229,10 @@ export function PropertyPanel({
                 {(['entity', 'reflection', 'both'] as const).map((side) => (
                   <button
                     key={side}
-                    onClick={() => {}}
+                    onClick={() => {
+                      updateSealRequiredSide(selectedSeal.id, side);
+                      onUpdateSeal({ ...selectedSeal, requiredSide: side });
+                    }}
                     className={cn(
                       'py-1.5 px-2 rounded-lg text-xs font-medium transition-all',
                       selectedSeal.requiredSide === side
